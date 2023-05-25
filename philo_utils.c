@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 19:38:29 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/16 17:28:11 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/25 16:05:37 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ pthread_mutex_t	*create_forks(int num_philo)
 
 void	init_mutex(t_data *data)
 {
-	data->mutex->death_lock = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(data->mutex->death_lock, NULL);
-	data->mutex->time_lock = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(data->mutex->time_lock, NULL);
+	data->mutex->alive = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(data->mutex->alive, NULL);
 	data->mutex->print_lock = malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(data->mutex->print_lock, NULL);
 	data->mutex->meal = malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(data->mutex->meal, NULL);
-	data->mutex->run = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(data->mutex->run, NULL);
+	data->mutex->l_meal = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(data->mutex->l_meal, NULL);
 }
 
 void	create_data_philo(int i, t_data *data, t_philo *p)
@@ -44,12 +42,10 @@ void	create_data_philo(int i, t_data *data, t_philo *p)
 	p->arg = data->arg;
 	p->mutex = data->mutex;
 	p->philo_pid = i;
-	p->data->is_dead = 0;
+	p->is_alive = 1;
 	p->meal = 0;
-	p->time_stamp = 0;
 	p->last_eat = 0;
-	p->eating = false;
-	p->start_time = 0;
+	p->start_time = current_time();
 	p->l_fork_m = &data->forks[i];
 	p->r_fork_m = &data->forks[(i + 1) % p->arg->num_of_phl];
 }
@@ -78,7 +74,8 @@ t_data	*create_data(int argc, char **argv)
 	if (argc == 6)
 		data->arg->num_of_eat = my_atoi(argv[5]);
 	else
-		data->arg->num_of_eat = 0;
+		data->arg->num_of_eat = -1;
+	data->enough = 0;
 	init_mutex(data);
 	data->forks = create_forks(data->arg->num_of_phl);
 	create_philos(data);
