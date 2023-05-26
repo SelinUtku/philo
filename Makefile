@@ -6,13 +6,14 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/09 20:49:06 by sutku             #+#    #+#              #
-#    Updated: 2023/05/25 18:08:34 by sutku            ###   ########.fr        #
+#    Updated: 2023/05/26 16:03:11 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
-PHL_SRC		=	main.c philo_utils.c help_functions.c philos.c philo_utils_2.c argument_control.c
+PHL_SRC		=	main.c philo_utils.c help_functions.c philos.c philo_utils_2.c \
+				argument_control.c cleaning.c
 PHL_OBJ		=	$(PHL_SRC:.c=.o)
 
 
@@ -22,7 +23,7 @@ PHL_OBJ		=	$(PHL_SRC:.c=.o)
 
 CC		= 	cc
 RM		=   rm -f
-CFLAGS	=	-pthread -fsanitize=thread -g #-Wall -Werror -Wextra -pthread -fsanitize=thread -g
+CFLAGS	=	-pthread # -fsanitize=address -g3 #-Wall -Werror -Wextra -pthread -fsanitize=thread -g
 
 NAME	=	philo
 

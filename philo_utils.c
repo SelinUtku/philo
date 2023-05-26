@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 19:38:29 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/25 16:05:37 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:56:14 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ void	create_data_philo(int i, t_data *data, t_philo *p)
 	p->data = data;
 	p->arg = data->arg;
 	p->mutex = data->mutex;
-	p->philo_pid = i;
+	p->p_pid = i;
 	p->is_alive = 1;
 	p->meal = 0;
 	p->last_eat = 0;
 	p->start_time = current_time();
 	p->l_fork_m = &data->forks[i];
-	p->r_fork_m = &data->forks[(i + 1) % p->arg->num_of_phl];
+	if (data->arg->num_of_phl != 1)
+		p->r_fork_m = &data->forks[(i + 1) % p->arg->num_of_phl];
+	else
+		p->r_fork_m = NULL;
 }
 
 void	create_philos(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 19:18:47 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/25 18:52:41 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:04:21 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_func(t_philo *p, char *str)
 
 	pthread_mutex_lock(p->mutex->print_lock);
 	time = current_time() - p->start_time;
-	printf("[%d] %d %s\n", time, p->philo_pid, str);
+	printf("[%d] %d %s\n", time, p->p_pid, str);
 	pthread_mutex_unlock(p->mutex->print_lock);
 }
 
@@ -57,23 +57,4 @@ void	unlock_mutex(t_philo *p)
 {
 	pthread_mutex_unlock(p->r_fork_m);
 	pthread_mutex_unlock(p->l_fork_m);
-}
-
-void	destroy_mutexes(t_data *data)
-{
-	pthread_mutex_destroy(data->mutex->alive);
-	pthread_mutex_destroy(data->mutex->print_lock);
-	pthread_mutex_destroy(data->mutex->meal);
-	pthread_mutex_destroy(data->mutex->l_meal);
-}
-
-void	free_all(t_data *data)
-{
-	destroy_mutexes(data);
-	free(data->mutex);
-	free(data->forks);
-	free(data->philos);
-	free(data->arr_pid);
-	free(data->arg);
-	free(data);
 }

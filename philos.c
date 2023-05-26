@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:04:21 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/25 18:24:58 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:05:53 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	even_philos(t_data *data)
 	i = 0;
 	while (i < data->arg->num_of_phl)
 	{
-		if (pthread_create(&data->arr_pid[i], NULL, &philo_routine, &data->philos[i]) != 0)
+		if (pthread_create(&data->arr_pid[i], \
+			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
 			perror("Failed to create threads");
 			return ;
@@ -35,7 +36,8 @@ void	odd_philos(t_data *data)
 	i = 1;
 	while (i < data->arg->num_of_phl)
 	{
-		if (pthread_create(&data->arr_pid[i], NULL, &philo_routine, &data->philos[i]) != 0)
+		if (pthread_create(&data->arr_pid[i], \
+			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
 			perror("Failed to create threads");
 			return ;
@@ -60,9 +62,9 @@ bool	control_ate_enough(t_data *data, int a)
 
 void	control_philos(t_data *data)
 {
-	int	a;
-	int	done;
-	int	j;
+	int			a;
+	int			done;
+	long int	time;
 
 	a = 0;
 	done = 0;
@@ -70,11 +72,12 @@ void	control_philos(t_data *data)
 	{
 		if (is_dead(&data->philos[a]) == true)
 		{
-			printf("[%ld] %d is dead\n", current_time() - data->philos[a].start_time, data->philos[a].philo_pid);
-			j = -1;
+			time = current_time() - data->philos[a].start_time;
+			printf("[%ld] %d is dead\n", time, data->philos[a].p_pid);
+			a = -1;
 			pthread_mutex_lock(data->mutex->alive);
-			while (++j < data->arg->num_of_phl)
-				data->philos[j].is_alive = 0;
+			while (++a < data->arg->num_of_phl)
+				data->philos[a].is_alive = 0;
 			pthread_mutex_unlock(data->mutex->alive);
 			done = 1;
 		}

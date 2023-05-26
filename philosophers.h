@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 22:30:30 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/25 18:51:27 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:59:02 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct	s_data;
 
 typedef struct s_philo
 {
-	int				philo_pid;
+	int				p_pid;
 	int				meal;
 	int				val;
 	int				is_alive;

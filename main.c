@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:52:13 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/25 18:51:39 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:04:38 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	philo_is_eating(t_philo *p)
 	if (check_alive(p) == true)
 	{
 		print_func(p, "has taken a left fork");
+		if (p->arg->num_of_phl == 1)
+			return (pthread_mutex_unlock(p->l_fork_m), -1);
 		pthread_mutex_lock(p->r_fork_m);
 		if (check_alive(p) == true)
 		{
@@ -63,22 +65,6 @@ void	*philo_routine(void *arg)
 	return (NULL);
 }
 
-bool	one_philo(t_data *data)
-{
-	int	cur;
-
-	if (data->arg->num_of_phl == 1)
-	{
-		cur = current_time();
-		printf("[0] 0 is taken left fork\n");
-		while (current_time() - cur < data->arg->time_to_die)
-			usleep(500);
-		printf("[%d] 0 is dead\n", data->arg->time_to_die);
-		return (true);
-	}
-	return (false);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -93,8 +79,6 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	data = create_data(argc, argv);
 	data->arr_pid = malloc(sizeof(pthread_t) * data->arg->num_of_phl);
-	if (one_philo(data) == true)
-		return (0);
 	call_philos(data);
 	free_all(data);
 	return (0);
