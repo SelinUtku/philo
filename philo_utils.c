@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 19:38:29 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 15:56:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:29:13 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 pthread_mutex_t	*create_forks(int num_philo)
 {

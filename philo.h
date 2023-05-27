@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 22:30:30 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 15:59:02 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:54:09 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -88,6 +88,6 @@ bool		ate_enough(t_philo *p);
 bool		is_dead(t_philo *p);
 bool		check_alive(t_philo *p);
 // sleep
-void		my_sleep(t_philo *p, int mil);
+void		my_sleep(int mil);
 
 #endif

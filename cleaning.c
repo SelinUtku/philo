@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:02:30 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:02:58 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:28:54 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 void	destroy_mutexes(t_data *data)
 {

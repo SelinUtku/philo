@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:52:13 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:04:38 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 16:02:44 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	philo_is_eating(t_philo *p)
 {
@@ -29,7 +29,7 @@ int	philo_is_eating(t_philo *p)
 			p->meal++;
 			if (ate_enough(p) == true)
 				return (unlock_mutex(p), 2);
-			my_sleep(p, p->arg->time_to_eat);
+			my_sleep(p->arg->time_to_eat);
 			if (check_alive(p) == false)
 				return (-1);
 			return (unlock_mutex(p), 0);
@@ -53,7 +53,7 @@ void	*philo_routine(void *arg)
 		if (p->val != -1 && p->val != 2)
 		{
 			print_func(p, "is sleeping");
-			my_sleep(p, p->arg->time_to_sleep);
+			my_sleep(p->arg->time_to_sleep);
 			if (check_alive(p) == false)
 				break ;
 		}
@@ -68,7 +68,6 @@ void	*philo_routine(void *arg)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-	int		cur;
 
 	if (argc != 5 && argc != 6)
 	{

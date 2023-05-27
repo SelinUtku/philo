@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:04:21 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:05:53 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:51:19 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 void	even_philos(t_data *data)
 {
@@ -22,7 +22,7 @@ void	even_philos(t_data *data)
 		if (pthread_create(&data->arr_pid[i], \
 			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
-			perror("Failed to create threads");
+			write(2, "Failed to create threads\n", 25);
 			return ;
 		}
 		i = i + 2;
@@ -39,7 +39,7 @@ void	odd_philos(t_data *data)
 		if (pthread_create(&data->arr_pid[i], \
 			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
-			perror("Failed to create threads");
+			write(2, "Failed to create threads\n", 25);
 			return ;
 		}
 		i = i + 2;
@@ -101,7 +101,7 @@ void	call_philos(t_data *data)
 	{
 		if (pthread_join(data->arr_pid[i], NULL) != 0)
 		{
-			perror("Failed waiting threads");
+			write(2, "Failed waiting threads\n", 23);
 			return ;
 		}
 	}

@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:12:07 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:04:57 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:54:00 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 bool	is_dead(t_philo *p)
 {
@@ -60,7 +60,7 @@ bool	ate_enough(t_philo *p)
 	return (false);
 }
 
-void	my_sleep(t_philo *p, int mil)
+void	my_sleep(int mil)
 {
 	long int	cur;
 

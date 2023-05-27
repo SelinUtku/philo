@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 19:18:47 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:04:21 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:28:58 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	my_atoi(char *str)
 {

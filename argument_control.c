@@ -6,13 +6,13 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:05:14 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/26 16:04:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/27 15:46:34 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
-int	my_is_digit(char *str)
+bool	my_is_digit(char *str)
 {
 	int	i;
 	int	control;
@@ -24,13 +24,13 @@ int	my_is_digit(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (-1);
+			return (false);
 		control = 1;
 		i++;
 	}
 	if (control == 0)
-		return (-1);
-	return (0);
+		return (false);
+	return (true);
 }
 
 bool	argument_check(int argc, char **argv)
@@ -45,7 +45,7 @@ bool	argument_check(int argc, char **argv)
 	}
 	while (++i < argc)
 	{
-		if (my_is_digit(argv[i]) == -1)
+		if (my_is_digit(argv[i]) == false)
 		{
 			printf(DIGIT);
 			return (false);
