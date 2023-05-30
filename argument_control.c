@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:05:14 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/27 15:46:34 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/30 17:20:58 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	argument_check(int argc, char **argv)
 			printf(DIGIT);
 			return (false);
 		}
-		if (my_atoi(argv[i]) < 0)
+		if (my_atoi(argv[i]) <= 0)
 		{
 			printf(POSITIVE);
 			return (false);

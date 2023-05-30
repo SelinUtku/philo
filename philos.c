@@ -6,13 +6,13 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:04:21 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/27 15:51:19 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/30 17:25:45 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	even_philos(t_data *data)
+bool	even_philos(t_data *data)
 {
 	int	i;
 
@@ -23,13 +23,14 @@ void	even_philos(t_data *data)
 			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
 			write(2, "Failed to create threads\n", 25);
-			return ;
+			return (false);
 		}
 		i = i + 2;
 	}
+	return (true);
 }
 
-void	odd_philos(t_data *data)
+bool	odd_philos(t_data *data)
 {
 	int	i;
 
@@ -40,10 +41,11 @@ void	odd_philos(t_data *data)
 			NULL, &philo_routine, &data->philos[i]) != 0)
 		{
 			write(2, "Failed to create threads\n", 25);
-			return ;
+			return (false);
 		}
 		i = i + 2;
 	}
+	return (true);
 }
 
 bool	control_ate_enough(t_data *data, int a)
@@ -54,47 +56,50 @@ bool	control_ate_enough(t_data *data, int a)
 		printf("[%ld] all philosophers ate [%d] time\n", \
 			current_time() - data->philos[a].start_time, data->philos[a].meal);
 		pthread_mutex_unlock(data->mutex->l_meal);
-		return (false);
+		return (true);
 	}
 	pthread_mutex_unlock(data->mutex->l_meal);
-	return (true);
+	return (false);
 }
 
 void	control_philos(t_data *data)
 {
 	int			a;
-	int			done;
 	long int	time;
 
 	a = 0;
-	done = 0;
-	while (done == 0)
+	while (1)
 	{
-		if (is_dead(&data->philos[a]) == true)
+		if (is_dead(&data->philos[a]) == true
+			&& data->philos[a].meal != data->arg->num_of_eat)
 		{
+			pthread_mutex_lock(data->mutex->print_lock);
 			time = current_time() - data->philos[a].start_time;
 			printf("[%ld] %d is dead\n", time, data->philos[a].p_pid);
-			a = -1;
 			pthread_mutex_lock(data->mutex->alive);
+			a = -1;
 			while (++a < data->arg->num_of_phl)
 				data->philos[a].is_alive = 0;
 			pthread_mutex_unlock(data->mutex->alive);
-			done = 1;
+			pthread_mutex_unlock(data->mutex->print_lock);
+			break ;
 		}
-		if (control_ate_enough(data, a) == false)
+		if (control_ate_enough(data, a) == true)
 			break ;
 		a++;
 		a = a % data->arg->num_of_phl;
 	}
 }
 
-void	call_philos(t_data *data)
+bool	call_philos(t_data *data)
 {
 	int	i;
 
-	even_philos(data);
+	if (even_philos(data) == false)
+		return (false);
 	usleep(100);
-	odd_philos(data);
+	if (odd_philos(data) == false)
+		return (false);
 	control_philos(data);
 	i = -1;
 	while (++i < data->arg->num_of_phl)
@@ -102,7 +107,8 @@ void	call_philos(t_data *data)
 		if (pthread_join(data->arr_pid[i], NULL) != 0)
 		{
 			write(2, "Failed waiting threads\n", 23);
-			return ;
+			return (false);
 		}
 	}
+	return (true);
 }

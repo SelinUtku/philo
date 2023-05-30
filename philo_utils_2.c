@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:12:07 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/27 15:54:00 by sutku            ###   ########.fr       */
+/*   Updated: 2023/05/29 19:09:02 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	is_dead(t_philo *p)
 {
 	long int	time;
 
-	time = current_time() - p->start_time;
 	pthread_mutex_lock(p->mutex->l_meal);
+	time = current_time() - p->start_time;
 	if (time - p->last_eat >= p->arg->time_to_die)
 	{
 		pthread_mutex_unlock(p->mutex->l_meal);
@@ -60,11 +60,11 @@ bool	ate_enough(t_philo *p)
 	return (false);
 }
 
-void	my_sleep(int mil)
+void	my_sleep(t_philo *p, int mil)
 {
 	long int	cur;
 
 	cur = current_time();
-	while (current_time() - cur < mil)
+	while (is_dead(p) == false && current_time() - cur < mil)
 		usleep(500);
 }
