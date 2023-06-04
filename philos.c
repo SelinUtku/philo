@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:04:21 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/30 17:25:45 by sutku            ###   ########.fr       */
+/*   Updated: 2023/06/03 22:17:27 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	control_philos(t_data *data)
 		{
 			pthread_mutex_lock(data->mutex->print_lock);
 			time = current_time() - data->philos[a].start_time;
-			printf("[%ld] %d is dead\n", time, data->philos[a].p_pid);
+			printf("[%ld] %d died\n", time, data->philos[a].p_pid);
 			pthread_mutex_lock(data->mutex->alive);
 			a = -1;
 			while (++a < data->arg->num_of_phl)

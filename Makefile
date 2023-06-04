@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/09 20:49:06 by sutku             #+#    #+#              #
-#    Updated: 2023/05/30 17:43:06 by sutku            ###   ########.fr        #
+#    Updated: 2023/06/03 22:23:37 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PHL_OBJ		=	$(PHL_SRC:.c=.o)
 
 CC		= 	cc
 RM		=   rm -f
-CFLAGS	=	-pthread -Wall -Werror -Wextra #-fsanitize=address -g3 # -fsanitize=thread -g
+CFLAGS	=	-pthread -Wall -Werror -Wextra # -fsanitize=thread -g 
 
 NAME	=	philo
 
@@ -48,4 +48,4 @@ fclean: clean
 	
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

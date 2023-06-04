@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:52:13 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/30 17:59:04 by sutku            ###   ########.fr       */
+/*   Updated: 2023/06/03 22:16:09 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	philo_is_eating(t_philo *p)
 				return (unlock_mutex(p), 2);
 			my_sleep(p, p->arg->time_to_eat);
 			if (check_alive(p) == false)
-				return (-1);
+				return (unlock_mutex(p), -1);
 			return (unlock_mutex(p), 0);
 		}
 		else
-			return (-1);
+			return (unlock_mutex(p), -1);
 	}
 	else
 		return (pthread_mutex_unlock(p->l_fork_m), -1);
@@ -79,7 +79,6 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	// atexit(&leaks);
 	if (argc != 5 && argc != 6)
 	{
 		printf("Wrong Argument Number !\n");

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:12:07 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/29 19:09:02 by sutku            ###   ########.fr       */
+/*   Updated: 2023/06/03 22:09:15 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	check_alive(t_philo *p)
 	pthread_mutex_lock(p->mutex->alive);
 	if (p->is_alive == 0)
 	{
-		unlock_mutex(p);
 		pthread_mutex_unlock(p->mutex->alive);
 		return (false);
 	}

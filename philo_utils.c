@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 19:38:29 by sutku             #+#    #+#             */
-/*   Updated: 2023/05/30 17:37:09 by sutku            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:36:44 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_data	*create_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	if (my_malloc_data(data) == false)
-		return (NULL);
+		return (free_all(data), NULL);
 	data->arg->num_of_phl = my_atoi(argv[1]);
 	data->arg->time_to_die = my_atoi(argv[2]);
 	data->arg->time_to_eat = my_atoi(argv[3]);
@@ -88,9 +88,9 @@ t_data	*create_data(int argc, char **argv)
 	init_mutex(data);
 	data->forks = create_forks(data->arg->num_of_phl);
 	if (data->forks == NULL)
-		return (NULL);
+		return (free_all(data), NULL);
 	create_philos(data);
 	if (data->philos == NULL)
-		return (NULL);
+		return (free_all(data), NULL);
 	return (data);
 }
